@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "check": "hyper-elements check templates/",
-    "statement": "rm -f docs/*.values.json && for t in statement reply letter; do hyper-elements design new templates/$t.tsx -o docs/nextjs.$t.values.json --values docs/nextjs.json; done && hyper-elements render docs/ --out out",
+    "statement": "rm -f docs/*.values.json && for t in statement reply letter; do hyper-elements design new templates/$t.tsx -o docs/nextjs.$t.values.json --values docs/nextjs.json; done && hyper-elements render docs/ --out renders",
     "sample": "node --experimental-strip-types scripts/sample.ts",
     "preview:email": "hyper-elements preview templates/reply.tsx"
   },
@@ -19,7 +19,9 @@
     "@hyper-elements/react": "^0.5.2",
     "@react-pdf/renderer": "^4.9.0",
     "@resvg/resvg-js": "^2.6.2",
+    "@resvg/resvg-wasm": "^2.6.2",
     "@untitledui/icons": "^0.0.23",
+    "buffer": "^6.0.3",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",

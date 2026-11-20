@@ -1,14 +1,26 @@
 // Renders a statement with the same Hyper Elements templates the CLI uses (templates/*.tsx).
 // POST { output: "statement" | "reply" | "letter", values } -> { html, text } for the page and the email, a PDF for the letter.
 // Values a template refuses come back as 422 with the template's own diagnostics.
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { createElement } from "react";
 import { ElementsError, render } from "@hyper-elements/react";
 import { renderPdf } from "@hyper-elements/react/pdf";
 import Letter from "@templates/letter";
 import Reply from "@templates/reply";
 import Statement from "@templates/statement";
+
+// In the browser: fonts and the resvg WebAssembly come from /public; Buffer (used for base64) from the buffer package.
+let ready: Promise<void> | undefined;
+async function fontFile(file: string) {
+  ready ??= (async () => {
+    const { Buffer } = await import("buffer");
+    (globalThis as { Buffer?: unknown }).Buffer ??= Buffer;
+    const { initWasm } = await import("@resvg/resvg-wasm");
+    await initWasm(fetch("/resvg.wasm"));
+  })();
+  await ready;
+  return new Uint8Array(await (await fetch(`/fonts/${file}`)).arrayBuffer());
+}
+
 
 type Diagnostic = { severity: string; code: string; message: string; path?: string };
 
@@ -17,8 +29,8 @@ const FONT_FILES: Array<[string, string, number]> = [
   ["JetBrains Mono", "JetBrainsMono-400.woff", 400],
   ["JetBrains Mono", "JetBrainsMono-600.woff", 600],
 ];
-let fonts: Promise<Array<{ family: string; src: Buffer; weight: number }>> | undefined;
-const loadFonts = () => (fonts ??= Promise.all(FONT_FILES.map(async ([family, file, weight]) => ({ family, weight, src: await readFile(join(process.cwd(), "fonts", file)) }))));
+let fonts: Promise<Array<{ family: string; src: Uint8Array; weight: number }>> | undefined;
+const loadFonts = () => (fonts ??= Promise.all(FONT_FILES.map(async ([family, file, weight]) => ({ family, weight, src: await fontFile(file) }))));
 
 const brief = (list: readonly unknown[] = []): Diagnostic[] =>
   (list as Diagnostic[]).filter((d) => d.severity === "error" || d.severity === "warning").map(({ severity, code, message, path }) => ({ severity, code, message, path }));
