@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "template": {
+    "module": "../templates/letter.tsx",
+    "id": "verdict.Letter",
+    "version": "1.0.0",
+    "sha256": "b22ee44ba93b50d770a259de4a8c8954c12b493ce75da3d172530e0b0fd9b50c"
+  },
+  "formats": [
+    "a4"
+  ],
+  "values": {
+    "vendor": "rohit-jsfreaky",
+    "contact": "github.com/rohit-jsfreaky",
+    "date": "2026-11-20",
+    "signer": "Security contact, rohit-jsfreaky",
+    "customer": "Northwind Labs",
+    "advisory": "CVE-2026-119348",
+    "aliases": "GHSA-pc58-hwjq-p385",
+    "summary": "Next.js: Cross-client response injection and disclosure in self-hosted Next.js applications forwarding fetched responses",
+    "details": "Self-hosted Next.js applications (App Router route handlers and the fetch cache) that return a fetched upstream response unchanged can emit a response whose declared framing does not match the body actually sent. When such an application sits behind an HTTP/1.1 reverse proxy that permits pipelined response queueing, a crafted upstream response can desynchronize responses between clients, enabling response injection and disclosure of other clients' responses.",
+    "severity": "moderate",
+    "published": "2026-11-19",
+    "link": "https://github.com/vercel/next.js/security/advisories/GHSA-pc58-hwjq-p385",
+    "products": [
+      {
+        "name": "Sundown",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      },
+      {
+        "name": "Fineprint",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      },
+      {
+        "name": "Plainspeed",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      },
+      {
+        "name": "Owed",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      },
+      {
+        "name": "Columnist",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      },
+      {
+        "name": "Runway",
+        "version": "0.1.0",
+        "status": "fixed",
+        "packages": "next 16.4.6"
+      }
+    ]
+  }
+}

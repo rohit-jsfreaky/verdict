@@ -1,0 +1,45 @@
+{
+  "name": "verdict",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "check": "hyper-elements check templates/",
+    "statement": "rm -f docs/*.values.json && for t in statement reply letter; do hyper-elements design new templates/$t.tsx -o docs/nextjs.$t.values.json --values docs/nextjs.json; done && hyper-elements render docs/ --out out",
+    "sample": "node --experimental-strip-types scripts/sample.ts",
+    "preview:email": "hyper-elements preview templates/reply.tsx"
+  },
+  "dependencies": {
+    "@hyper-elements/email-clients": "^0.5.3",
+    "@hyper-elements/lint": "^0.1.11",
+    "@hyper-elements/react": "^0.5.2",
+    "@react-pdf/renderer": "^4.9.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@untitledui/icons": "^0.0.23",
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "satori": "^0.33.5"
+  },
+  "devDependencies": {
+    "@hyper-elements/cli": "^0.3.3",
+    "@tailwindcss/turbopack": "^4.3.3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5"
+  },
+  "type": "module",
+  "hyperElements": {
+    "templates": [
+      "templates/**"
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Verdict: an official bulletin. White paper, navy ink, ruled header, status stamps. */
+:root {
+  --paper: #ffffff;
+  --wash: #f3f5f8;
+  --ink: #14171d;
+  --ink-2: #3a404a;
+  --muted: #5e6571;
+  --faint: #9aa1ab;
+  --line: #dfe3e8;
+  --rule: #c5ccd6;
+  --navy: #13294b;
+  --navy-2: #1f3d6e;
+  --red: #b3261e;
+  --red-soft: #fbeceb;
+  --green: #1e6b45;
+  --green-soft: #e6f2ec;
+  --blue: #1f4fa3;
+  --blue-soft: #e8eef9;
+  --amber: #8a5a00;
+  --amber-soft: #fbf1dd;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-wash: var(--wash);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-rule: var(--rule);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --font-sans: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), Menlo, monospace;
+}
+
+html { -webkit-font-smoothing: antialiased; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif; }
+::selection { background: #cfdcf3; }
+
+@layer components {
+  .tag { font-family: var(--font-jetbrains), Menlo, monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .stamp { display: inline-block; font-family: var(--font-jetbrains), Menlo, monospace; font-weight: 600; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border: 1.5px solid currentColor; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 6px; font-weight: 600; font-size: 14px; padding: 8px 14px; white-space: nowrap; transition: background-color 120ms ease, border-color 120ms ease; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-navy { background: var(--navy); color: #fff; }
+  .btn-navy:hover:not(:disabled) { background: var(--navy-2); }
+  .btn-line { background: var(--paper); color: var(--ink); border: 1px solid var(--rule); }
+  .btn-line:hover:not(:disabled) { border-color: var(--navy); }
+  .input { width: 100%; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 10px; font-size: 14px; outline: none; transition: border-color 120ms ease, box-shadow 120ms ease; }
+  .input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgb(19 41 75 / 0.12); }
+  .scroll-thin { scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+}
