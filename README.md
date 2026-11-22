@@ -11,6 +11,8 @@ your products' lockfiles against it, gives each product a status, and writes:
 
 Built with [Hyper Elements](https://github.com/hyper-elements/hyper-elements) for the Hyper Elements Template Challenge.
 
+**Live:** https://verdict.rohitkashyapmrt.workers.dev
+
 ![Verdict checking CVE-2026-119348 against six apps' lockfiles](media/desk.png)
 
 ## Why this exists
@@ -56,7 +58,7 @@ The customer reply: [media/reply.png](media/reply.png). The landing page (7 sect
 ## How Hyper Elements is used
 
 The three documents are **Hyper Elements templates** in `templates/`, one per root. The app renders them in a
-route handler (`src/app/api/render/route.ts`), and the CLI renders the same files.
+browser (`src/lib/render-route.ts`, so the site runs on Cloudflare with no render server), and the CLI renders the same files.
 
 - **Typed fields with rules** (`templates/_shared/doc.tsx`): the advisory id must look like `CVE-…`/`GHSA-…`, the
   link must be `https://`, severity is a choice, and each product's status and reason are choices from the VEX
@@ -85,7 +87,7 @@ npm run check          # check the three templates with their example
 npm run statement      # docs/nextjs.json → out/docs/ (statement page, reply email, letter PDF)
 npm run sample         # rebuild the sample from OSV and the series' lockfiles
 npm run preview:email  # the email as each email client draws it
-npm run build && npm start
+npm run build && npx wrangler dev   # the static site, served the way Cloudflare does
 ```
 
 ## Project layout
